@@ -3,13 +3,16 @@ name = "ai-atm"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.14"
+requires-python = ">=3.12,<3.13"
 dependencies = [
     "matplotlib>=3.11.2",
-    "numpy>=2.5.3",
+    "numpy>=1.26,<2; sys_platform == 'darwin' and platform_machine == 'x86_64'",
+    "numpy>=2.5.3; sys_platform != 'darwin' or platform_machine != 'x86_64'",
     "pandas>=3.0.6",
     "scikit-learn>=1.9.1",
-    "sentence-transformers>=6.1.0",
+    "sentence-transformers>=5,<6; sys_platform == 'darwin' and platform_machine == 'x86_64'",
+    "sentence-transformers>=6.1.0; sys_platform != 'darwin' or platform_machine != 'x86_64'",
+    "transformers<5; sys_platform == 'darwin' and platform_machine == 'x86_64'",
 ]
 
 [dependency-groups]
@@ -17,3 +20,6 @@ dev = [
     "ipykernel>=7.4.0",
     "jupyter>=1.1.1",
 ]
+
+[tool.uv]
+required-environments = ["sys_platform == 'darwin' and platform_machine == 'x86_64'"]
